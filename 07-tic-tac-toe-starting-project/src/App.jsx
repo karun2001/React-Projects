@@ -18,21 +18,22 @@ const PLAYERS = {
   O: 'Player 2'
 }
 
-function deriveActivePlayer(gameTurns){
-  let activePlayer = 'X';
-  if( gameTurns.length > 0 &&  gameTurns[0].player === 'X'){
-    activePlayer = 'O';
-  }
-  return activePlayer; 
-}
-
 function App() {
 
   const [players, setPlayers] = useState({
-    'X': 'Player 1',
-    'O': 'Player 2'
+    'X': PLAYERS.X,
+    'O': PLAYERS.O
   });
+
   const [gameTurns, setGameTurns] = useState([]);
+  
+  function deriveActivePlayer(gameTurns){
+    let activePlayer = 'X';
+    if( gameTurns.length > 0 &&  gameTurns[0].player === 'X'){
+      activePlayer = 'O';
+    }
+    return activePlayer; 
+  }
   
   function deriveGameBoard(gameTurns){
     
@@ -55,8 +56,8 @@ function App() {
 
       if(
         firstSymbol && 
-        firstSymbol == secondSymbol && 
-        firstSymbol == thirdSymbol
+        firstSymbol === secondSymbol && 
+        firstSymbol === thirdSymbol
       ){
         winner = players[firstSymbol];
       }
@@ -75,7 +76,6 @@ function App() {
         { square: {row: rowIndex, col: colIndex}, player: currentPlayer}, 
         ...prevTurns,
       ];
-
       return updatedTurns;
     });
   }
@@ -92,7 +92,7 @@ function App() {
 
   let  gameBoard = deriveGameBoard(gameTurns);
   const winner = deriveWinner(gameBoard, players);
-  const hasDraw = gameTurns.length == 9 && !winner;
+  const hasDraw = gameTurns.length === 9 && !winner;
   const activePlayer =  deriveActivePlayer(gameTurns);
   
 
@@ -101,13 +101,13 @@ function App() {
     <div id="game-container">
       <ol id="players" className="highlight-player">
         <Player 
-          initialName="Player 1" 
+          initialName={PLAYERS.X} 
           symbol="X" 
           isActive={activePlayer === "X"}
           onChangeName={handlePlayerNameChange}
         />
         <Player 
-          initialName="Player 2" 
+          initialName={PLAYERS.O} 
           symbol="O" 
           isActive={activePlayer === "O"}
           onChangeName={handlePlayerNameChange}
@@ -115,8 +115,8 @@ function App() {
       </ol>
       {(winner || hasDraw) && <GameOver winner= {winner} onRestart={handleRestart}/>}
       <GameBoard 
-        onSelectSquare={handleSelectSquare} 
-        board={gameBoard} 
+        onSelectSquare={ handleSelectSquare } 
+        board={ gameBoard } 
       />
     </div>
     <Log turns = {gameTurns}  />  
