@@ -1,19 +1,19 @@
 import { useState } from "react";
 import TableContent from "./components/TableContent"; 
+
 function App(){
    const[inputs, setInputs] = useState({ 
-    initialInvestment: 0,
-    annualInvestment: 0,
-    expectedReturn: 0,
-    duration: 0  
+    initialInvestment: null,
+    annualInvestment: null,
+    expectedReturn: null,
+    duration: null  
    });
+
    function handleChange(identifier, value){
     setInputs((prevState)=>{
         let newObj = {...prevState};
-        console.log("old object", newObj);
-        newObj[identifier] = value;
-        console.log("new object",newObj);
-        return {...newObj}
+        newObj[identifier] = +value;
+        return newObj;
     }); 
    }
 
@@ -27,20 +27,36 @@ return (
                 <section id="inputs">
                     <div id="input-div">
                         <article>
-                            <label htmlFor="#input1" >Initial Investment</label>
-                            <input id="input1" type="text" value={inputs['initialInvestment']} onChange={(event)=> handleChange('initialInvestment', event.target.value)} />
+                            <label>Initial Investment</label>
+                            <input type="number" 
+                                   value = {inputs['initialInvestment']>0 ? inputs['initialInvestment']: null } 
+                                   onChange = {(event)=> handleChange('initialInvestment', event.target.value)} 
+                                   reuired 
+                            />
                         </article>
                         <article>
-                            <label htmlFor="input2" >Annual Investment</label>
-                            <input name="input2" type="text" value={inputs['annualInvestment']} onChange={(event)=> handleChange('annualInvestment', event.target.value)} />
+                            <label>Annual Investment</label>
+                            <input type="number" 
+                                   value = {inputs['annualInvestment']>0 ? inputs['annualInvestment'] : null} 
+                                   onChange = {(event)=> handleChange('annualInvestment', event.target.value)}   
+                                   required 
+                            />
                         </article>
                         <article>
-                            <label htmlFor="input3" >Expected Return</label>
-                            <input name="input3" type="text" value={inputs['expectedReturn']} onChange={(event)=> handleChange('expectedReturn', event.target.value)}/>
+                            <label>Expected Annual Intrest</label>
+                            <input type="number" 
+                                   value = { inputs['expectedReturn']>0 ? inputs['expectedReturn']: null} 
+                                   onChange = {(event)=> handleChange('expectedReturn', event.target.value)} 
+                                   required
+                            />
                         </article>
                         <article>
-                            <label htmlFor="input4">Duration</label>
-                            <input name="input4" type="text" value={inputs['duration']} onChange={(event)=> handleChange('duration', event.target.value)} />
+                            <label>Duration</label>
+                            <input type="number" 
+                                   value = {inputs['duration']>0 ? inputs['duration']: null} 
+                                   onChange = {(event)=> handleChange('duration', event.target.value)} 
+                                   required 
+                            />
                         </article>
                     </div>
                 </section>
@@ -56,9 +72,11 @@ return (
                                     <th scope="col" >Invested Capital</th>
                                 </tr>
                             </thead>
+                            
                             <tbody>
-                               <TableContent inputValues={inputs}/>
+                               <TableContent {...inputs} />
                             </tbody>
+                            
                         </table>
                     </div>
                 </section>
