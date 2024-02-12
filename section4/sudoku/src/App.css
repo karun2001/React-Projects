@@ -1,0 +1,106 @@
+*{
+  padding: 0;
+  margin: 0;
+  border: none;
+}
+html{
+  min-height: 100vh;
+}
+
+#game-board{
+  position: relative;
+  min-width: 16rem;
+  max-width: 18rem;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  margin: 3rem auto;
+}
+#game-board > ol{
+  list-style: none;
+}
+li{
+  display: inline-block;
+}
+
+#game-board button{
+  width: 2rem; 
+  height: 2rem;
+  font-size: 1.3rem;
+  font-weight:100;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: none;
+
+}
+
+
+input{
+  display: inline-block;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  font-size: 1.2rem;
+  border: none;
+  border: 0.1px solid rgb(71, 66, 66);
+  border-bottom: none;
+  border-left: none;
+}
+
+#hbar{
+  width: 18rem;
+  height: 2px;
+  position: absolute;
+  background-color: blue;
+  border-color: blue;
+}
+#hbar:nth-of-type(1){
+  height: 3px;
+  top:0rem;
+}
+#hbar:nth-of-type(2){
+  top:6rem;
+}
+#hbar:nth-of-type(3){
+  top:12rem;
+}
+#hbar:nth-of-type(4){
+  height: 3px;
+  top:18rem;
+}
+
+#vbar{
+  width: 2px;
+  height: 100%;
+  position: absolute;
+  background-color: blue;
+  border-color: blue;
+}
+#vbar:nth-of-type(5){
+  left:0rem;
+  width: 3px;
+}
+#vbar:nth-of-type(6){
+  left:6rem;
+}
+#vbar:nth-of-type(7){
+  left:12rem;
+}
+#vbar:nth-of-type(8){
+  left:18rem;
+  height:101.0%
+}
+
+#game-levels-list{
+  margin: 3rem auto;
+  display: flex;
+  justify-content: space-around;
+  max-width: 18rem;
+  align-items: center;
+}
+
+#game-levels-list button{
+  padding: 5px;  
+  border-radius: 2px;
+}
